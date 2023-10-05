@@ -17,15 +17,18 @@ export default function Register({ setPage }: PageProps) {
 
     try {
       const userData: User = await register(username, password);
-      userData.username = username;
+      // console.log(userData);
 
-      setUser(userData);
-      setPage('search');
+      if (userData) {
+        userData.username = username;
 
-      setRegistrationStatus('success');
+        setUser(userData);
+        setPage('search');
+
+        setRegistrationStatus('success');
+      }
     } catch (err) {
-      setRegistrationStatus('error');
-      console.error(err);
+      setRegistrationStatus(err as string);
     }
   }
   const navigate = useNavigate();
@@ -80,7 +83,7 @@ export default function Register({ setPage }: PageProps) {
           (registrationStatus === 'success' ? (
             <div className='success-message'>User registered successfully.</div>
           ) : (
-            <div className='error-message'>Error registering user.</div>
+            <div className='error-message'>{registrationStatus.toString()}</div>
           ))}
       </form>
     </div>

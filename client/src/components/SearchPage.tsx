@@ -111,11 +111,15 @@ export default function SearchPage({ page, setPage }: PageProps) {
       setCocktails([singleCocktail]);
     }
   }
+
+  const handleLogoClick = () => {
+    window.location.reload();
+  }
   return (
     <div className='list-page'>
       <header className='page-header'>
         <div className='header-wrapper'>
-          <img className='logo' src={logo} />
+          <img className='logo' src={logo} onClick={handleLogoClick} alt='Logo'/>
           <div className='button-container'>
             {Cookies.get('token') ? (
               <>

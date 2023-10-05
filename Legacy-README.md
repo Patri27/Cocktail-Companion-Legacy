@@ -37,5 +37,8 @@ Based on Eduard's Solo Project, we have decided to make changes to the applicati
 - Instead of having only one `App.css` we seperated them into styling each components. And gather them all at the end inside of `App.css`.
 - We have a `types` folder for showing the logo properly( before it always said that it couldn't find the image )
 - And follows all the libs we use we have some config file for them.
+- Before the presentation we made the validator for the username input at login and register. We used 
+- 
 ## What we learned from this project?
 
+- We got to get our hands dirty when working with Typescript and create a love-hate relationship with it. But at the end all the complaints were there to help us not making errors.
