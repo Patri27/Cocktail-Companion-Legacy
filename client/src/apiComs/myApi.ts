@@ -7,12 +7,16 @@ import { useAuth } from '../context/authContext';
 
 const rootUrl = 'http://localhost:3001';
 
-export async function fetchMostLikedDrinksWithDetails(): Promise<(MostLikedDrinks| null)[]>{
+export async function fetchMostLikedDrinksWithDetails(): Promise<
+  (MostLikedDrinks | null)[]
+> {
   try {
     const response = await axios.get(`${rootUrl}/most-liked-drinks`);
     const mostLikedDrinksData: MostLikedDrinks[] = response.data;
 
-    const sortedDrinks = mostLikedDrinksData.sort((a, b) => b.likeCount - a.likeCount);
+    const sortedDrinks = mostLikedDrinksData.sort(
+      (a, b) => b.likeCount - a.likeCount
+    );
 
     const mostLikedDrinksWithDetails = await Promise.all(
       sortedDrinks.map(async (drink) => {
@@ -20,7 +24,10 @@ export async function fetchMostLikedDrinksWithDetails(): Promise<(MostLikedDrink
           const detailedDrinkInfo = await getCocktailById(drink._id);
           return { ...drink, ...detailedDrinkInfo };
         } catch (error) {
-          console.error(`Error fetching details for drink with ID ${drink._id}:`, error);
+          console.error(
+            `Error fetching details for drink with ID ${drink._id}:`,
+            error
+          );
           return null;
         }
       })
@@ -33,8 +40,6 @@ export async function fetchMostLikedDrinksWithDetails(): Promise<(MostLikedDrink
   }
 }
 
-
-
 export async function register(username: string, password: string) {
   const token = Cookies.get('token');
   try {
@@ -44,13 +49,13 @@ export async function register(username: string, password: string) {
 
     const credentialsObj = {
       username: username,
-      password: password,
+      password: password
     };
 
     const res = await axios.post(`${rootUrl}/register`, credentialsObj, {
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     } as AxiosRequestConfig);
 
     const userData = res.data;
